@@ -1,6 +1,7 @@
 import { Usuario } from './../model/usuario';
 import { UsuarioService } from './../service/usuario.service';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-usuario-list',
@@ -13,7 +14,9 @@ export class UsuarioListComponent implements OnInit {
   usuario: Usuario;
   usuarios: Usuario[] = [];
 
-  constructor(private service: UsuarioService) { }
+  constructor(
+    private service: UsuarioService,
+    private router: Router) { }
 
   ngOnInit() {
     this.listar();
@@ -23,6 +26,14 @@ export class UsuarioListComponent implements OnInit {
     this.service.findAll().subscribe((dados) => {
       this.usuarios = dados;
     })
+  }
+
+  editar(usuario: Usuario) {
+    this.router.navigate([`/usuario/edit/${usuario.id}`]);
+  }
+
+  deletar(usuario: Usuario) {
+    this.router.navigate([`/usuario/delete/${usuario.id}`]);
   }
 
 }

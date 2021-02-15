@@ -1,3 +1,4 @@
+import { Routes, RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -8,19 +9,35 @@ import { HeaderComponent } from './header/header.component';
 import { UsuarioListComponent } from './usuario-list/usuario-list.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { UsuarioCreateComponent } from './usuario-create/usuario-create.component';
+import { UsuarioDeleteComponent } from './usuario-delete/usuario-delete.component';
+import { UsuarioEdicaoComponent } from './usuario-edicao/usuario-edicao.component';
+
+const ROTAS: Routes = [
+  { path: '', component: UsuarioListComponent },
+  { path: 'create', component: UsuarioCreateComponent },
+  { path: 'list', component: UsuarioListComponent  },
+  { path: 'usuario/edit/:id', component: UsuarioEdicaoComponent },
+  { path: 'usuario/delete/:id', component: UsuarioDeleteComponent }
+
+]
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    UsuarioListComponent
+    UsuarioListComponent,
+    UsuarioCreateComponent,
+    UsuarioDeleteComponent,
+    UsuarioEdicaoComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    MDBBootstrapModule.forRoot()
+    MDBBootstrapModule.forRoot(),
+    RouterModule.forRoot(ROTAS)
   ],
   providers: [],
   bootstrap: [AppComponent]
